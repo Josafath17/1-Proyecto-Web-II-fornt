@@ -1,90 +1,44 @@
-// App.js
+import './App.scss';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import React, {createContext, useState } from 'react';
+import Login from "./Components/Login/login";
+import Home from "./Components/Home/Home";
 
-import React from 'react';
-import './App.css'; // Asegúrate de tener el archivo de estilos CSS
+
+
+const AppContext = createContext();
+export { AppContext };
+
+
 
 function App() {
+
+  const [logeado, setLogeado] = useState(localStorage.getItem('login'));
+ 
+  
+
   return (
-    <div className="section">
-      <div className="container">
-        <div className="row full-height justify-content-center">
-          <div className="col-12 text-center align-self-center py-5">
-            <div className="section pb-5 pt-5 pt-sm-2 text-center">
-              <h6 className="mb-0 pb-3">
-                <span>Log In </span>
-                <span>Sign Up</span>
-              </h6>
-              <input className="checkbox" type="checkbox" id="reg-log" name="reg-log" />
-              <label htmlFor="reg-log"></label>
-              <div className="card-3d-wrap mx-auto">
-                <div className="card-3d-wrapper">
-                  <div className="card-front">
-                    <div className="center-wrap">
-                      <div className="section text-center">
-                        <h4 className="mb-4 pb-3">Log In</h4>
-                        <div className="form-group">
-                          <input type="email" className="form-style" placeholder="Email" />
-                          <i className="input-icon uil uil-at"></i>
-                        </div>
-                        <div className="form-group mt-2">
-                          <input type="password" className="form-style" placeholder="Password" />
-                          <i className="input-icon uil uil-lock-alt"></i>
-                        </div>
-                        <a href="https://www.web-leb.com/code" className="btn mt-4">Login</a>
-                        <p className="mb-0 mt-4 text-center">
-                          <a href="https://www.web-leb.com/code" className="link">Forgot your password?</a>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-back">
-                    <div className="center-wrap">
-                      <div className="section text-center">
-                        <h4 className="mb-3 pb-3">Sign Up</h4>
-                        <div className="form-group">
-                          <input type="Email" className="form-style" placeholder="Email" />
-                          <i className="input-icon uil uil-user"></i>
-                        </div>
-                        <div className="form-group mt-2">
-                          <input type="password" className="form-style" placeholder="Password" />
-                          <i className="input-icon uil uil-lock-alt"></i>
-                        </div>
-                        <div className="form-group mt-2">
-                          <input type="Repeat password" className="form-style" placeholder="Repeat password" />
-                          <i className="input-icon uil uil-phone"></i>
-                        </div>
-                        <div className="form-group mt-2">
-                          <input type="Pin" className="form-style" placeholder="Pin(6 Digitos)" />
-                          <i className="input-icon uil uil-phone"></i>
-                        </div>
-                        <div className="form-group mt-2">
-                          <input type="First Name" className="form-style" placeholder="First Name" />
-                          <i className="input-icon uil uil-lock-alt"></i>
-                        </div>
-                        <div className="form-group mt-2">
-                          <input type="Second Name" className="form-style" placeholder="Second Name" />
-                          <i className="input-icon uil uil-lock-alt"></i>
-                        </div>
-                        <div className="form-group mt-2">
-                          <input type="Country" className="form-style" placeholder="Country" />
-                          <i className="input-icon uil uil-lock-alt"></i>
-                        </div>
-                        <div className="form-group mt-2">
-                          <input type="Brith Day" className="form-style" placeholder="Brith Day" />
-                          <i className="input-icon uil uil-lock-alt"></i>
-                        </div>
-                       
-                        <a href="https://www.web-leb.com/code" className="btn mt-4">Register</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <BrowserRouter>
+      <div className="App">
+        <div className="Components">
+          <Routes>
+            <Route path="/" element={logeado ? <Navigate to="/Home" /> : <Navigate to="/Login" />} />
+            <Route path="/Login" element={
+              <AppContext.Provider value={{ logeado, setLogeado }}>
+                <Login />
+              </AppContext.Provider>
+            } />
+            <Route path="/Home" element={
+              logeado ? (
+                <AppContext.Provider value={{ logeado, setLogeado }}>
+                  <Home />
+                </AppContext.Provider>
+              ) : (<Navigate to="/" />)
+            } />
+          </Routes>
         </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
