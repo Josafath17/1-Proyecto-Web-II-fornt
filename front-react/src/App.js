@@ -1,8 +1,9 @@
 import './App.scss';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import React, {createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import Login from "./Components/Login/login";
 import Home from "./Components/Home/Home";
+import Register from "./Components/Register/Register";
 
 
 
@@ -14,8 +15,8 @@ export { AppContext };
 function App() {
 
   const [logeado, setLogeado] = useState(localStorage.getItem('login'));
- 
-  
+
+
 
   return (
     <BrowserRouter>
@@ -35,6 +36,11 @@ function App() {
                 </AppContext.Provider>
               ) : (<Navigate to="/" />)
             } />
+            <Route
+              path='/Register'
+              element={<Register />}
+            />
+
           </Routes>
         </div>
       </div>
