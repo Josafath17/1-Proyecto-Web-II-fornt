@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./Login.scss";
+import "./Register.scss";
 import { AppContext } from '../../App';
 
 
