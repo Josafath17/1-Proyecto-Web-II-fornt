@@ -67,9 +67,8 @@
 .btn-container {
     display: flex;
     justify-content: center;
-   
+    position: absolute;
     bottom: 20px;
-
     /* Ajusta la distancia desde la parte inferior según sea necesario */
     margin-top: 20px;
 }
@@ -91,11 +90,8 @@
     font-family: 'Roboto', 'Segoe UI', sans-serif;
     text-transform: uppercase;
     color: var(--color);
-    margin-top: 550px;
-    margin-right: 50px;
-    position: absolute;
-   
-    left: 43%;
+    margin-top: 400px;
+    margin-right: 160px;
 
 }
 
@@ -142,16 +138,15 @@
 .icon-botton {
     width: 50px;
     height: 50px;
+    top: 50;
     border: 1px solid #cdcdcd;
     background: white;
     border-radius: 25px;
     overflow: hidden;
-    position: absolute;
+    position: relative;
     transition: width 0.2s ease-in-out;
     font-weight: 500;
     font-family: inherit;
-    top: 50%; 
-    left: 48%;
 }
 
 .add-botton:hover {
@@ -189,8 +184,6 @@
 .botton-txt {
     opacity: 0;
     transition: opacity 0.2s;
-    
-
 }
 
 .add-botton:hover::before,
@@ -237,4 +230,27 @@
     right: 15px;
     height: 4px;
     top: calc(50% - 2px);
+}
+
+.users-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    & > .user-card {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(255, 255, 255);
+        padding: 2rem;
+        border-radius: 2rem;
+
+        & > img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+    }
 }

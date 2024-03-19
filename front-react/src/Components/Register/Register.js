@@ -70,7 +70,7 @@ function Register() {
     const data = {
 
       firstName: firstName,
-      lastname: lastName,
+      lastName: lastName,
       birth_date: brigt,
       pin: parseInt(pin),
       country: country,
@@ -91,7 +91,11 @@ function Register() {
       .then((response) => {
         console.log(2);
         if (!response.ok) {
-          console.log(3);
+
+          response.json().then((errorData) => {
+            console.log(errorData.error);
+          });
+          
           throw new Error("Network response was not ok");
         }
         console.log(4);
