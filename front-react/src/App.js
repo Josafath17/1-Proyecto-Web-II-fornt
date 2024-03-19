@@ -6,7 +6,7 @@ import Home from "./Components/Home/Home";
 import Register from "./Components/Register/Register";
 import ManageUsers from './Components/ManageUsers/ManageUsers';
 import ManageVideos from './Components/ManageVideos/ManageVideos';
-
+import Playlist from './Components/Playlist/Playlist';
 
 
 
@@ -57,7 +57,13 @@ function App() {
                 </AppContext.Provider>
               ) : (<Navigate to="/" />)
             } />
-            
+            <Route path="/playlist" element={
+              logeado ? (
+                <AppContext.Provider value={{ logeado, setLogeado }}>
+                  <Playlist />
+                </AppContext.Provider>
+              ) : (<Navigate to="/" />)
+            } />
 
           </Routes>
         </div>
