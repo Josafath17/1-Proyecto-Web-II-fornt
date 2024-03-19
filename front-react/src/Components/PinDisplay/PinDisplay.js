@@ -23,9 +23,9 @@ const PinDisplay = ({ show, setShow, validatePin, onSuccess }) => {
           X
         </button>
         <div className="titulo">
-        <h1>Ingrese su pin</h1>
+          <p>Ingrese su pin</p>
         </div>
-       
+
         <form className="pin-form" onSubmit={handleSubmit}>
           <input
             name="pin"

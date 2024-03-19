@@ -62,77 +62,6 @@
     height: 100%;
 }
 
-//boton diseñado
-
-.btn-container {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 20px;
-    /* Ajusta la distancia desde la parte inferior según sea necesario */
-    margin-top: 20px;
-}
-
-.btn {
-    --color: #eb092f;
-    --color2: rgb(0, 0, 0);
-    padding: 0.8em 1.75em;
-    background-color: transparent;
-    border-radius: 6px;
-    border: .3px solid var(--color);
-    transition: .5s;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    z-index: 1;
-    font-weight: 300;
-    font-size: 17px;
-    font-family: 'Roboto', 'Segoe UI', sans-serif;
-    text-transform: uppercase;
-    color: var(--color);
-    margin-top: 400px;
-    margin-right: 160px;
-
-}
-
-
-.btn::after,
-.btn::before {
-    content: '';
-    display: block;
-    height: 100%;
-    width: 100%;
-    transform: skew(90deg) translate(-50%, -50%);
-    position: absolute;
-    inset: 50%;
-    left: 25%;
-    z-index: -1;
-    transition: .5s ease-out;
-    background-color: var(--color);
-}
-
-.btn::before {
-    top: -50%;
-    left: -25%;
-    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
-}
-
-.btn:hover::before {
-    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
-}
-
-.btn:hover::after {
-    transform: skew(45deg) translate(-50%, -50%);
-}
-
-.btn:hover {
-    color: var(--color2);
-}
-
-.btn:active {
-    filter: brightness(.7);
-    transform: scale(.98);
-}
 
 //botton de agregar
 .icon-botton {
@@ -253,4 +182,73 @@
             border-radius: 50%;
         }
     }
+}
+//boton diseñado
+.btn-container {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px;
+    margin-top: 20px;
+}
+
+.btn {
+    --color: #eb092f;
+    --color2: rgb(0, 0, 0);
+    padding: 0.8em 1.75em;
+    background-color: transparent;
+    border-radius: 6px;
+    border: .3px solid var(--color);
+    transition: .5s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    font-weight: 300;
+    font-size: 17px;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+    color: var(--color);
+    margin-top: 400px;
+    margin-right: 160px;
+
+}
+
+
+.btn::after,
+.btn::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    transform: skew(90deg) translate(-50%, -50%);
+    position: absolute;
+    inset: 50%;
+    left: 25%;
+    z-index: -1;
+    transition: .5s ease-out;
+    background-color: var(--color);
+}
+
+.btn::before {
+    top: -50%;
+    left: -25%;
+    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.btn:hover::before {
+    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.btn:hover::after {
+    transform: skew(45deg) translate(-50%, -50%);
+}
+
+.btn:hover {
+    color: var(--color2);
+}
+
+.btn:active {
+    filter: brightness(.7);
+    transform: scale(.98);
 }

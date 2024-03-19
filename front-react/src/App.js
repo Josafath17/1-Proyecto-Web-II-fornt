@@ -4,6 +4,9 @@ import React, { createContext, useState } from 'react';
 import Login from "./Components/Login/login";
 import Home from "./Components/Home/Home";
 import Register from "./Components/Register/Register";
+import ManageUsers from './Components/ManageUsers/ManageUsers';
+import ManageVideos from './Components/ManageVideos/ManageVideos';
+
 
 
 
@@ -40,6 +43,21 @@ function App() {
               path='/Register'
               element={<Register />}
             />
+            <Route path="/manage-users" element={
+              logeado ? (
+                <AppContext.Provider value={{ logeado, setLogeado }}>
+                  <ManageUsers />
+                </AppContext.Provider>
+              ) : (<Navigate to="/" />)
+            } />
+            <Route path="/manage-videos" element={
+              logeado ? (
+                <AppContext.Provider value={{ logeado, setLogeado }}>
+                  <ManageVideos />
+                </AppContext.Provider>
+              ) : (<Navigate to="/" />)
+            } />
+            
 
           </Routes>
         </div>

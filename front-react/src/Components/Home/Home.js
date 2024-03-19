@@ -87,11 +87,13 @@ const Home = () => {
             </div>
           </div>
         ))}
+        
         <button className="icon-botton add-botton ">
           <div class="add-icon"></div>
           <div class="botton-txt" onClick={() => setShowManageUsersPin(true)}>
             Agregar perfil{" "}
           </div>
+
         </button>
       </div>
 
