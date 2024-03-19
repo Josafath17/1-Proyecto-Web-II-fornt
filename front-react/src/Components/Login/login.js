@@ -12,10 +12,15 @@ function Login() {
     const [password, setPassword] = useState();
     const [datauser, setDatauser] = useState([]);
     const navigate = useNavigate();
+    const [erroruser, setErroruser] = useState("");
 
     const { logeado, setLogeado } = useContext(AppContext);
 
     useEffect(() => {
+        if (!!datauser.id) {
+            setLogeado(true);
+            setErroruser("");
+        }
 
 
 
@@ -30,9 +35,10 @@ function Login() {
     const Confirm = (usertrue, passwordtrue) => {
         if (usertrue == email && passwordtrue == password) {
             return true;
-            
+
         }
         else {
+
             console.log('no se encontro')
             return false;
         }
@@ -65,15 +71,15 @@ function Login() {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
-                    return response.json(); 
+                    return response.json();
                 })
                 .then(data => {
-                  
+
                     data.forEach(user => {
                         if (esCorreoValido(email)) {
-                            
+
                             if (Confirm(user.username, user.password)) {
-                               
+
                                 setDatauser(user);
                                 setLogeado(true);
                                 return;
@@ -82,10 +88,11 @@ function Login() {
                         }
                     });
                 })
-                
+
                 .catch(err => {
                     console.log('error: ' + err);
                     alert('Datos incorrectos');
+
                 });
 
         };
@@ -98,11 +105,14 @@ function Login() {
                     <div className="container1">
                         <h1>Login</h1>
                         <div id="contain" >
+                            <div className='errormesage'>
+                                <p>{erroruser}</p>
+                            </div>
+
                             <div className="tex_field">
                                 <input className="email" type="text" onChange={ev => setEmail(ev.target.value)} required />
                                 <span></span>
                                 <label>Email </label>
-
                             </div>
                             <div className="tex_field">
                                 <input className="contra" type="password" onChange={ev => setPassword(ev.target.value)} required />
@@ -116,11 +126,11 @@ function Login() {
                                 </label>
                                 <a href='/#'>Olvidé la Contraseña</a>
                             </div>
-                            <input type="submit" value="login" onClick={() => Validar()} />
+                            <input type="submit" value="Login" onClick={() => Validar()} />
 
                             <div className='register'>
                                 <p>
-                                   No cuento con una cuenta <a href='/Register'>Registrate</a>
+                                    No cuento con una cuenta <a href='/Register'>Registrate</a>
                                 </p>
                             </div>
                         </div>

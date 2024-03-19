@@ -67,8 +67,9 @@
 .btn-container {
     display: flex;
     justify-content: center;
-    position: absolute;
+   
     bottom: 20px;
+
     /* Ajusta la distancia desde la parte inferior según sea necesario */
     margin-top: 20px;
 }
@@ -90,8 +91,11 @@
     font-family: 'Roboto', 'Segoe UI', sans-serif;
     text-transform: uppercase;
     color: var(--color);
-    margin-top: 400px;
-    margin-right: 160px;
+    margin-top: 550px;
+    margin-right: 50px;
+    position: absolute;
+   
+    left: 43%;
 
 }
 
@@ -138,15 +142,16 @@
 .icon-botton {
     width: 50px;
     height: 50px;
-    top: 50;
     border: 1px solid #cdcdcd;
     background: white;
     border-radius: 25px;
     overflow: hidden;
-    position: relative;
+    position: absolute;
     transition: width 0.2s ease-in-out;
     font-weight: 500;
     font-family: inherit;
+    top: 50%; 
+    left: 48%;
 }
 
 .add-botton:hover {
@@ -184,6 +189,8 @@
 .botton-txt {
     opacity: 0;
     transition: opacity 0.2s;
+    
+
 }
 
 .add-botton:hover::before,

@@ -6,10 +6,10 @@ function Register() {
   const navigate = useNavigate();
 
   const [logeado, setLogeado] = useState();
-  const [username, setUsername] = useState(); 
+  const [username, setUsername] = useState();
   const [pin, setPin] = useState();
   const [lastName, setLastName] = useState();
-  const [firstName, setFirstName] = useState(); 
+  const [firstName, setFirstName] = useState();
   const [birth_date, setBirth_date] = useState();
   const [day, setDay] = useState(false);
   const [month, setMonth] = useState(false);
@@ -91,7 +91,7 @@ function Register() {
       .then((response) => {
         console.log(2);
         if (!response.ok) {
-            console.log(3);
+          console.log(3);
           throw new Error("Network response was not ok");
         }
         console.log(4);
@@ -100,7 +100,7 @@ function Register() {
       })
 
       .then((data) => {
-       
+
         const user = {
           id: data._id,
           email: data.username,
@@ -387,7 +387,14 @@ function Register() {
               />
               <label htmlFor="">Confirm Password</label>
             </div>
+            <div className='BtnLogin'>
+              <p>
+                <a href='/Login'>Login</a>
+              </p>
+            </div>
             <button>Registrar</button>
+
+
           </form>
         </section>
       </div>
