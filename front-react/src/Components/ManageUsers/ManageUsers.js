@@ -7,13 +7,20 @@ import Modal from "../Modal/Modal";
 
 
 
-const AddOrUpdateVideo = ({ handleClose, type }) => {
+const AddOrUpdateVideo = ({ handleClose, type, account }) => {
+
+  const [firstName, setFirstName] = useState(account.firstName);
+  const [avatar, setAvatar] = useState(account.avatar);
+  const [age, setAge] = useState(account.age);
+  const [pin, setPin] = useState(account.pin);
+  const userData = JSON.parse(localStorage.getItem("DataUser") || "{}");
 
   const [formData, setFormData] = useState({
-    name: "",
-    avatar: "",
-    age: "",
-    pin: ""
+    firstName: firstName,
+    avatar: avatar,
+    age: age,
+    pin: pin,
+    user: userData._id
   });
 
   const handleSubmit = (e) => {
@@ -22,63 +29,105 @@ const AddOrUpdateVideo = ({ handleClose, type }) => {
     console.log("Form values:", formData);
 
     if (type === "add") {
+      agregar()
       // Implementar Add
     } else {
+      // actualizar(account._id);
       // Implementar Update
     }
   };
+  // const actualizar = async (userId) => {
+  //   const urlAccount = `http://localhost:3000/api/accounts/?id=${userId}`;
+
+  //   await fetch(urlAccount, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(formData),
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         response.json().then((errorData) => {
+  //           console.log(errorData.error);
+  //         });
+
+  //         throw new Error("Network response was not ok");
+  //       }
+
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //       window.location.reload();
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       // Manejar errores de manera apropiada
+  //     });
+  // };
+
+
+
+
+
+
+
+
+
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
 
+    const updatedValue = name === 'pin' ? parseInt(value) : value;
+
+    setFormData({ ...formData, [name]: updatedValue });
   };
 
-  const [firstName, setFirstName] = useState();
-  const [avatar, setAvatar] = useState();
-  const [age, setAge] = useState();
-  const [pin, setPin] = useState();
-  const accountres = {
-
-    firstName: firstName,
-    avatar: avatar,
-    age: age,
-    pin: pin
-
-  };
-  const urlaccount = "http://localhost:3000/api/accounts";
 
 
-  fetch(urlaccount, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(accountres),
-  })
-    .then((response) => {
-      console.log(2);
-      if (!response.ok) {
+  const agregar = async () => {
+    const urlaccount = "http://localhost:3000/api/accounts";
 
-        response.json().then((errorData) => {
-          console.log(errorData.error);
-        });
-
-        throw new Error("Network response was not ok");
-      }
-      console.log(4);
-      return response.json();
-
+    await fetch(urlaccount, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
+      .then((response) => {
+        console.log(2);
+        if (!response.ok) {
 
+          response.json().then((errorData) => {
+            console.log(errorData.error);
+          });
 
+          throw new Error("Network response was not ok");
+        }
+
+        console.log(4);
+        return response.json();
+
+      })
+      .then((data) => {
+        window.location.reload();
+        console.log(data);
+      })
+      .catch((err) => {
+        /* setErrorRegister(err.message); */
+      });
+
+  }
 
   return (
     <div className="add-or-update-user">
       <h1>{type === "add" ? "Agregar" : "Actualizar"} usuario</h1>
 
       <form onSubmit={handleSubmit}>
-        <input name="name" type="text" placeholder="Nombre del usuario" value={formData.name} onChange={handleInputChange} required />
+        <input name="firstName" type="text" placeholder="Nombre del usuario" value={formData.firstName} onChange={handleInputChange} required />
         <select name="avatar" value={formData.avatar} onChange={handleInputChange}>
           <option value="" disabled>Seleccione el avatar del usuario</option>
           <option value="/images/avatar1.png">Avatar1</option>
@@ -88,7 +137,8 @@ const AddOrUpdateVideo = ({ handleClose, type }) => {
         <input name="pin" type="number" placeholder="Pin del usuario" value={formData.pin} onChange={handleInputChange} required />
 
         <div className="buttons">
-          <button onClick={handleClose}>Cancelar</button>
+          <button type="button" onClick={handleClose}>Cancelar</button >
+
           <button type="submit">Guardar</button>
         </div>
       </form>
@@ -136,14 +186,16 @@ const ManageUsers = () => {
   const handleDelete = () => {
     //Implementar Delete
   };
-
+  const [account, setAccount] = useState([]);
   return (
     <div className="manage-users-container">
       <Modal show={modalType} handleClose={() => setModalType("")}>
-        <AddOrUpdateVideo
+        {<AddOrUpdateVideo
+          account={account}
           type={modalType}
           handleClose={() => setModalType("")}
-        />
+          accountId={account._id}
+        />}
       </Modal>
 
       <div className="titulo">
@@ -155,6 +207,7 @@ const ManageUsers = () => {
         headers={["Nombre", "Avatar", "Edad", "Pin"]}
         onEditClick={() => setModalType("edit")}
         onDeleteClick={handleDelete}
+        setAccount={setAccount}
       />
       <button onClick={() => setModalType("add")}>Agregar usuario</button>
 

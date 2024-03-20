@@ -9,10 +9,11 @@ const Home = () => {
   const [showManageVideosPin, setShowManageVideosPin] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const navigate = useNavigate();
+  
   const [users, setUsers] = useState([
     {
       name: "Jorgito",
-      avatar: "../../Accets/1.avif",
+      avatar: "/Accets/1.avif",
       age: 6,
       pin: 1234
     },
@@ -70,6 +71,7 @@ const Home = () => {
         onSuccess={() => navigate("/playlist")}
         validatePin={validateUserPin}
       />
+
 
       <div className="user">
         <User />

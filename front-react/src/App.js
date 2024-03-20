@@ -17,7 +17,7 @@ export { AppContext };
 
 function App() {
 
-  const [logeado, setLogeado] = useState(localStorage.getItem('login'));
+  const [logeado, setLogeado] = useState(localStorage.getItem('token'));
 
 
 
