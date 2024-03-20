@@ -87,6 +87,7 @@ const ManageVideos = () => {
       />
       <button onClick={() => setModalType("add")}>Agregar video</button>
       
+      
       <div className="button-container">
         <Link to="/">
           <button className="button">
