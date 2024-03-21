@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./Home.scss";
 import User from "../User/User";
 import PinDisplay from "../PinDisplay/PinDisplay";
@@ -10,27 +10,42 @@ const Home = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const navigate = useNavigate();
   
-  const [users, setUsers] = useState([
-    {
-      name: "Jorgito",
-      avatar: "/Accets/1.avif",
-      age: 6,
-      pin: 1234
-    },
-    {
-      name: "Luis",
-      avatar: "/avatars/2.jpg",
-      age: 4,
-      pin: 1235
-    },
-    {
-      name: "Pepe",
-      avatar: "/avatars/3.jpg",
-      age: 7,
-      pin: 1236
-    },
-  ]);
-  //Reemplazar datos de prueba por [] y traer data en useEffect
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const urllogin = "http://localhost:3000/api/accounts";
+      try {
+        const response = await fetch(urllogin, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          }
+        });
+  
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.log(errorData.error);
+          throw new Error("Network response was not ok");
+        }
+  
+        const data = await response.json();
+        console.log(data);
+        setUsers(data);
+  
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
+
+
+
+
+
+
 
   const validateAdminPin = (pin) => {
     const userData = JSON.parse(localStorage.getItem("DataUser") || "{}");
@@ -85,7 +100,7 @@ const Home = () => {
           <div className="user-card" key={index} onClick={() => setSelectedUser(user)}>
             <img src={user.avatar} alt="Avatar" />
             <div className="user-info">
-              <p>{user.name}</p>
+              <p>{user.firstName}</p>
             </div>
           </div>
         ))}
