@@ -15,15 +15,22 @@ const Table = ({ headers, data, onEditClick, onDeleteClick, setAccount }) => {
       <tbody>
         {data.map((row, index) => (
           <tr key={index}>
-            {Object.values(row).map((value, index) => (
-              <td key={index}>{value}</td>
-            ))}
+            {Object.values(row).map((value, index) => {
+              const pregunta = !(
+                index === 0 || (!!row.url ? index === 3 : false)
+              );
+              return pregunta ? <td key={index}>{value}</td> : <></>;
+            })}
             <td>
-              <button onClick={() => {
-                onEditClick();
-                setAccount(row)
-              }}>Editar</button>
-              <button onClick={onDeleteClick}>Eliminar</button>
+              <button
+                onClick={() => {
+                  setAccount(row);
+                  onEditClick();
+                }}
+              >
+                Editar
+              </button>
+              <button onClick={() => onDeleteClick(row.id)}>Eliminar</button>
             </td>
           </tr>
         ))}

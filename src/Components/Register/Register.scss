@@ -1,7 +1,5 @@
-@import '../../Styles/Mixins/media-queries.scss';
-@import '../../Styles/Variables/brakpoints.scss';
-
-
+@import "../../Styles/Mixins/media-queries.scss";
+@import "../../Styles/Variables/brakpoints.scss";
 
 .boddyregister {
   display: flex;
@@ -13,11 +11,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-
-
-
-
-
 
   section {
     position: relative;
@@ -107,8 +100,8 @@
           padding: 0 35px 0 5px;
           color: #000000;
 
-          &:focus~label,
-          &:valid~label {
+          &:focus ~ label,
+          &:valid ~ label {
             top: -5px;
           }
         }
